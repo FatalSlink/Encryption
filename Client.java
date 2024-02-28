@@ -17,7 +17,7 @@ public class Client {
              PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
-            out.println(message); // Send message to server
+            out.println(message); 
             System.out.println("Server says: " + in.readLine());
 
         } catch (UnknownHostException e) {
