@@ -4,11 +4,11 @@ import java.io.*;
 import java.net.*;
 
 public class Server {
-    private static String storedEncryptedToken = null; // To store the encrypted token
-    private static String originalToken = null; // To store the original token for showing after decryption
+    private static String storedEncryptedToken = null; 
+    private static String originalToken = null; 
 
     public static void main(String[] args) throws IOException {
-        int port = 12345; // Port number the server listens on
+        int port = 12345; 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Server is listening on port " + port);
 
@@ -21,11 +21,11 @@ public class Server {
                     System.out.println("Received: " + inputLine);
 
                     if (inputLine.startsWith("ENCRYPT")) {
-                        originalToken = inputLine.substring(8); // Extract token from message
+                        originalToken = inputLine.substring(8); 
                         storedEncryptedToken = encryptToken(originalToken);
                         out.println("TOKEN ENCRYPTED AND STORED");
                     } else if (inputLine.startsWith("DECRYPT")) {
-                        String attempt = inputLine.substring(8); // Extract token attempt for decryption
+                        String attempt = inputLine.substring(8);
                         String decryptedToken = decryptToken(storedEncryptedToken);
                         if (attempt.equals(decryptedToken)) {
                             out.println("DECRYPTION SUCCESSFUL");
@@ -61,7 +61,7 @@ public class Server {
         StringBuilder decrypted = new StringBuilder();
         for (char c : encryptedToken.toCharArray()) {
             int digit = Character.getNumericValue(c);
-            digit = (digit + 3) % 10; // Reverse encryption logic
+            digit = (digit + 3) % 10; 
             decrypted.append(digit);
         }
         return decrypted.toString();
